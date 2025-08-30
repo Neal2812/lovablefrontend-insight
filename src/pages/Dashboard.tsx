@@ -9,7 +9,7 @@ import { AnalyticsOverview } from "@/components/dashboard/analytics-overview"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Settings, User, Bell, LogOut } from "lucide-react"
-import { mockApiService } from "@/services/api"
+import { apiService } from "@/services/api"
 import { useToast } from "@/hooks/use-toast"
 
 export default function Dashboard() {
@@ -20,7 +20,7 @@ export default function Dashboard() {
   const handleFileUpload = async (files: File[]) => {
     try {
       for (const file of files) {
-        const result = await mockApiService.uploadDocument(file)
+        const result = await apiService.uploadDocument(file)
         console.log("Uploaded:", result)
       }
       
@@ -38,7 +38,8 @@ export default function Dashboard() {
   }
 
   const handleSendMessage = async (message: string): Promise<string> => {
-    return await mockApiService.sendChatMessage(message)
+    const result = await apiService.sendChatMessage(message)
+    return result.response
   }
 
   const handleViewDetails = (id: string) => {
@@ -51,7 +52,7 @@ export default function Dashboard() {
 
   const loadComplianceResults = async () => {
     try {
-      const results = await mockApiService.getComplianceResults()
+      const results = await apiService.getComplianceResults()
       setComplianceResults(results)
     } catch (error) {
       toast({

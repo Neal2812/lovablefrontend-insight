@@ -2,7 +2,7 @@
 // Update the BASE_URL to match your backend deployment
 
 const BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-backend-url.com' 
+  ? 'https://your-production-backend-url.com' 
   : 'http://localhost:8000'
 
 class ApiService {
